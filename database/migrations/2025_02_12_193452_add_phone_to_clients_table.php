@@ -9,20 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->string('phone')->nullable();
-        });
-    }
+    public function up()
+{
+    Schema::table('clients', function (Blueprint $table) {
+        if (!Schema::hasColumn('clients', 'phone')) {
+            $table->string('phone')->nullable(); 
+        }
+    });
+}
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->dropColumn('phone');
-        });
-    }
+    public function down()
+{
+    Schema::table('clients', function (Blueprint $table) {
+        $table->dropColumn('phone');
+    });
+}
 };
